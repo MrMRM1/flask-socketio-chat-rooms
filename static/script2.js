@@ -1,5 +1,4 @@
 let name_user = prompt("Please enter your name :");
-// let name_user = 'asd';
 if (name_user != null) {
   var $messages = $('.messages-content'),
       d, h, m;
@@ -24,9 +23,8 @@ if (name_user != null) {
 
   socket.on('join', function (data) {
     console.log(data)
-    $('<div class="join">' + data['name'] + 'join in chat</div>').appendTo($('.mCSB_container'));
+    $('<div class="join">' + data['name'] + ' join in chat</div>').appendTo($('.mCSB_container'));
   });
-
   socket.on('istyping', function (data) {
     if (data['user_id'] != user_id) {
       $('.status').html('<div class="message loading"><span></span></div>');
@@ -82,11 +80,11 @@ if (name_user != null) {
       return false;
     }
   })
-
   $('.message-input').keypress(function (){
-      socket.emit('istyping', {name: name_user, user_id: user_id});
+    socket.emit('istyping', {name: name_user, user_id: user_id});
   })
 }
 else {
-  $('.chat').html("<h1 onclick='location.reload()' style='color: blue; font-size: 3rem'>Name is required \n CLICK TO RELOAD</h1>");
+  alert('Name is required')
+  location.reload()
 }
